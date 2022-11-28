@@ -5,7 +5,7 @@
 
  $password = '';
  
- try {
+try {
      $pdo = new PDO($dsn, $user, $password);
 // orderに値あればture返す、返す先は$order
      if(isset($_GET['order'])){
@@ -20,12 +20,12 @@
         $keyword = NULL;
      }
 //  $orderがdescなら全てのカラムをupdated_at の降順に並べ替える　
-if($order === 'desc'){
+     if($order === 'desc'){
     $sql_select ='SELECT * FROM products WHERE product_name LIKE :keyword ORDER BY updated_at DESC';
     // それ以外の場合昇順に
-} else {
+     } else {
     $sql_select = 'SELECT * FROM products WHERE product_name LIKE :keyword ORDER BY updated_at ASC';
-}
+     }
      //$sql_select（SQL）を準備ただ中身はまだ動的
      $stmt_select = $pdo->prepare($sql_select);
     //  $keywordを含むものを::keywordに当てる、文字列型を指定                                                                                                    
@@ -36,9 +36,9 @@ if($order === 'desc'){
  
      
      $products = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
- } catch (PDOException $e) {
+}catch (PDOException $e) {
      exit($e->getMessage());
- }
+}
  ?>
  
  <!DOCTYPE html>
@@ -102,7 +102,7 @@ if($order === 'desc'){
                  </tr>
                  <?php
                  
-                 foreach ($products as $product) {
+                foreach ($products as $product) {
                      $table_row = "
                          <tr>
                          <td>{$product['product_code']}</td>
@@ -115,7 +115,7 @@ if($order === 'desc'){
                          </tr>                    
                      ";
                      echo $table_row;
-                 }
+                }
                  ?>
              </table>
          </article>

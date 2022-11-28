@@ -1,10 +1,10 @@
 <?php
- $dsn = 'mysql:dbname=pfp_db_app;host=localhost;charset=utf8mb4';
- $user = 'root';
+$dsn = 'mysql:dbname=pfp_db_app;host=localhost;charset=utf8mb4';
+$user = 'root';
 
- $password = '';
+$password = '';
  
- if(isset($_POST['submit'])){
+if(isset($_POST['submit'])){
     try{
         $pdo = new PDO($dsn,$user,$password);
 
@@ -36,34 +36,34 @@
     }catch(PDOException $e){
         exit($e->getMessage());
     }
- }
- if (isset($_GET['id'])) {
-     try {
-         $pdo = new PDO($dsn, $user, $password);
+}
+if (isset($_GET['id'])) {
+    try {
+        $pdo = new PDO($dsn, $user, $password);
          
-         $sql_select_product = 'SELECT * FROM products WHERE id = :id';
-         $stmt_select_product = $pdo->prepare($sql_select_product);
+        $sql_select_product = 'SELECT * FROM products WHERE id = :id';
+        $stmt_select_product = $pdo->prepare($sql_select_product);
 
-         $stmt_select_product->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
-         $stmt_select_product->execute();
+        $stmt_select_product->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
+        $stmt_select_product->execute();
 // カレントレコード（指定した連想配列）のみ習得
-         $product = $stmt_select_product->fetch(PDO::FETCH_ASSOC);
+        $product = $stmt_select_product->fetch(PDO::FETCH_ASSOC);
 
-         if($product === FALSE){
+        if($product === FALSE){
             exit('idパラメータの値が不正です');
-         }
-
-         $sql_select_vendor_codes = 'SELECT vendor_code FROM vendors';
-
-         $stmt_select_vendor_codes = $pdo->query($sql_select_vendor_codes);
-
-         $vendor_codes = $stmt_select_vendor_codes->fetchAll(PDO::FETCH_COLUMN);
-        }catch(PDOException $e){
-            exit($e->getMessage());
         }
-    }else{
-        exit('idパラメータの値が存在しません。');
+
+        $sql_select_vendor_codes = 'SELECT vendor_code FROM vendors';
+
+        $stmt_select_vendor_codes = $pdo->query($sql_select_vendor_codes);
+
+        $vendor_codes = $stmt_select_vendor_codes->fetchAll(PDO::FETCH_COLUMN);
+    }catch(PDOException $e){
+            exit($e->getMessage());
     }
+}else{
+        exit('idパラメータの値が存在しません。');
+}
 ?>
 
 
@@ -116,9 +116,9 @@
                     foreach($vendor_codes as $vendor_code){
                         if($vendor_code === $product['vendor_code']){
                         echo"<option value='{$vendor_code}' selected>{$vendor_code}</option>";
-                    }else{
+                        }else{
                         echo "<option value='{$vendor_code}'>{$vendor_code}</option>";
-                    }
+                        }
                     }
                     ?>
 
