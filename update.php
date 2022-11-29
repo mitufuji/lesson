@@ -1,8 +1,8 @@
 <?php
-$dsn = 'mysql:dbname=pfp_db_app;host=localhost;charset=utf8mb4';
-$user = 'root';
-
-$password = '';
+require('define.php');
+$dsn = DSN;
+$user = USER;
+$password = PASSWORD;
  
 if(isset($_POST['submit'])){
     try{
