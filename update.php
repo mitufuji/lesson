@@ -25,7 +25,7 @@ if(isset($_POST['submit'])){
         $stmt_update->bindValue(':stock_quantity',$_POST['stock_quantity'],PDO::PARAM_INT);
         $stmt_update->bindValue(':vendor_code',$_POST['vendor_code'],PDO::PARAM_INT);
         $stmt_update->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
-
+// 指摘３修正箇所です
         $bool_product_code=is_numeric($_POST['product_code']);
         $bool_product_name=is_string($_POST['product_name']);
         $bool_price=is_numeric($_POST['price']);
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])){
         $bool_id=is_numeric($_POST['id']);
 
        if($bool_product_code=== TRUE && $bool_product_name=== TRUE && $bool_price=== TRUE && $bool_stock_quantity=== TRUE && $bool_vendor_code=== TRUE){
-        $stmt_update->execute();
+           $stmt_update->execute();
 
        }else{
            header('Location:error.php');

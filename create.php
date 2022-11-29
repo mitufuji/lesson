@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
         $stmt_insert->bindValue(':stock_quantity',$_POST['stock_quantity'],PDO::PARAM_INT);
         $stmt_insert->bindValue(':vendor_code',$_POST['vendor_code'],PDO::PARAM_INT);
 
-    
+    // 指摘３修正箇所です
         
         $bool_product_code=is_numeric($_POST['product_code']);
         $bool_product_name=is_string($_POST['product_name']);
@@ -30,7 +30,7 @@ if(isset($_POST['submit'])){
         $bool_vendor_code=is_numeric($_POST['vendor_code']);
 
        if($bool_product_code=== TRUE && $bool_product_name=== TRUE && $bool_price=== TRUE && $bool_stock_quantity=== TRUE && $bool_vendor_code=== TRUE){
-         $stmt_insert->execute();
+           $stmt_insert->execute();
        }else{
            header('Location:error.php');
            exit;

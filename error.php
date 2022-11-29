@@ -1,3 +1,4 @@
+ <!-- 指摘３修正箇所です -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
