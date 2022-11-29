@@ -21,7 +21,23 @@ if(isset($_POST['submit'])){
         $stmt_insert->bindValue(':stock_quantity',$_POST['stock_quantity'],PDO::PARAM_INT);
         $stmt_insert->bindValue(':vendor_code',$_POST['vendor_code'],PDO::PARAM_INT);
 
-        $stmt_insert->execute();
+    
+        
+        $bool_product_code=is_numeric($_POST['product_code']);
+        $bool_product_name=is_string($_POST['product_name']);
+        $bool_price=is_numeric($_POST['price']);
+        $bool_stock_quantity=is_numeric($_POST['stock_quantity']);
+        $bool_vendor_code=is_numeric($_POST['vendor_code']);
+
+       if($bool_product_code=== TRUE && $bool_product_name=== TRUE && $bool_price=== TRUE && $bool_stock_quantity=== TRUE && $bool_vendor_code=== TRUE){
+         $stmt_insert->execute();
+       }else{
+           header('Location:error.php');
+           exit;
+       }
+       
+       
+        
 // INSERT命令で受けたレコード数を$countへ返す
         $count = $stmt_insert->rowCount();
 

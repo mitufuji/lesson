@@ -26,8 +26,22 @@ if(isset($_POST['submit'])){
         $stmt_update->bindValue(':vendor_code',$_POST['vendor_code'],PDO::PARAM_INT);
         $stmt_update->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
 
+        $bool_product_code=is_numeric($_POST['product_code']);
+        $bool_product_name=is_string($_POST['product_name']);
+        $bool_price=is_numeric($_POST['price']);
+        $bool_stock_quantity=is_numeric($_POST['stock_quantity']);
+        $bool_vendor_code=is_numeric($_POST['vendor_code']);
+        $bool_id=is_numeric($_POST['id']);
+
+       if($bool_product_code=== TRUE && $bool_product_name=== TRUE && $bool_price=== TRUE && $bool_stock_quantity=== TRUE && $bool_vendor_code=== TRUE){
         $stmt_update->execute();
 
+       }else{
+           header('Location:error.php');
+           exit;
+       }
+
+      
         $count = $stmt_update->rowCount();
 
         $message = "商品を{$count}件編集しました。";
